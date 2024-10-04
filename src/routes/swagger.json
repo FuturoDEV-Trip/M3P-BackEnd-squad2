@@ -1,0 +1,424 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Gerenciamento",
+    "description": "API para gerenciamento de usuários e locais",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Token de Autenticação"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login do usuário",
+        "description": "Essa rota será responsável por realizar o login do usuário",
+        "tags": ["Login"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Credenciais do usuário",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "Email do usuário"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "Senha do usuário"
+                }
+              },
+              "example": {
+                "email": "exemplo@gmail.com",
+                "password": "123456"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Token": {
+                  "type": "string",
+                  "description": "Token JWT"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email ou senha ausentes"
+          },
+          "401": {
+            "description": "Senha incorreta"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    },
+    "/usuarios": {
+      "post": {
+        "summary": "Cadastro de usuário",
+        "description": "Essa rota será responsável por cadastrar um novo usuário",
+        "tags": ["Usuário"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados do novo usuário",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome do usuário"
+                },
+                "cpf": {
+                  "type": "string",
+                  "description": "CPF do usuário"
+                },
+                "data_nascimento": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Data de nascimento do usuário"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Email do usuário"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "Senha do usuário"
+                },
+                "sexo": {
+                  "type": "string",
+                  "description": "Sexo do usuário"
+                }
+              },
+              "example": {
+                "nome": "Exemplo",
+                "cpf": "12345678900",
+                "data_nascimento": "2000-01-01",
+                "email": "exemplo@gmail.com",
+                "password": "123456",
+                "sexo": "Masculino"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário cadastrado com sucesso",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      },
+      "get": {
+        "summary": "Consultar todos os usuários",
+        "description": "Essa rota será responsável por consultar todos os usuários cadastrados",
+        "tags": ["Usuário"],
+        "responses": {
+          "200": {
+            "description": "Lista de usuários",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum usuário cadastrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "summary": "Consultar um usuário específico",
+        "description": "Essa rota será responsável por consultar um usuário específico pelo ID",
+        "tags": ["Usuário"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "description": "ID do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do usuário",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    },
+    "/local": {
+      "get": {
+        "summary": "Consultar todos os locais",
+        "description": "Essa rota será responsável por consultar todos os locais cadastrados",
+        "tags": ["Local"],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de locais",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Local"
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum local cadastrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    },
+    "/local/{info}": {
+      "post": {
+        "summary": "Cadastro de local",
+        "description": "Essa rota será responsável por cadastrar um novo local passando um nome ou CEP na URL",
+        "tags": ["Local"],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "info",
+            "required": true,
+            "type": "string",
+            "description": "Nome ou CEP do local"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local cadastrado com sucesso",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    },
+    "/local/{local_id}": {
+      "get": {
+        "summary": "Consultar um local específico",
+        "description": "Essa rota será responsável por consultar um local específico pelo ID",
+        "tags": ["Local"],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "local_id",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do local",
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar um local específico",
+        "description": "Essa rota será responsável por deletar um local específico pelo ID",
+        "tags": ["Local"],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "local_id",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Local deletado com sucesso"
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar um local específico",
+        "description": "Essa rota será responsável por atualizar um local específico pelo ID",
+        "tags": ["Local"],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "local_id",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dados do local",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao_local": {
+                  "type": "string",
+                  "description": "Descrição do local"
+                },
+                "latitude_local": {
+                  "type": "string",
+                  "description": "Latitude do local"
+                },
+                "longitude_local": {
+                  "type": "string",
+                  "description": "Longitude do local"
+                },
+                "cep_local": {
+                  "type": "string",
+                  "description": "CEP do local"
+                }
+              },
+              "example": {
+                "descricao_local": "Praça Central",
+                "latitude_local": "-23.550520",
+                "longitude_local": "-46.633308",
+                "cep_local": "01000-000"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "500": {
+            "description": "Erro ao processar a solicitação"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "nome": { "type": "string" },
+        "cpf": { "type": "string" },
+        "data_nascimento": { "type": "string", "format": "date" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "sexo": { "type": "string" }
+      }
+    },
+    "Local": {
+      "type": "object",
+      "properties": {
+        "local_id": { "type": "integer" },
+        "descricao_local": { "type": "string" },
+        "latitude_local": { "type": "string" },
+        "longitude_local": { "type": "string" },
+        "cep_local": { "type": "string" }
+      }
+    }
+  }
+}
