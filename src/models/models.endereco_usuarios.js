@@ -7,7 +7,7 @@ const endereco_usuario = connection.define('endereco_usuario', {
     autoIncrement: true,
     primaryKey: true        
     },
-    cep_local: {
+    cep_endereco: {
         type: DataTypes.STRING
     },
     latitude_endereco: {
