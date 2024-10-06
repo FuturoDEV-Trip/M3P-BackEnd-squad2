@@ -45,7 +45,6 @@ module.exports = {
           type: Sequelize.BOOLEAN
         },
         id_endereco: {
-          allowNull: false,
           type: Sequelize.INTEGER,
           references: {
             model: 'endereco_usuarios',

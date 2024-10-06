@@ -12,7 +12,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        cep_enderecol: {
+        cep_endereco: {
             type: Sequelize.STRING
         },
         latitude_endereco: {
@@ -25,11 +25,15 @@ module.exports = {
           allowNull: false,
           type: Sequelize.STRING
         },
+        bairro_endereco: {
+          allowNull: false,
+          type: Sequelize.STRING
+        },
         numero_endereco: {
           allowNull: false,
           type: Sequelize.NUMERIC
         },
-        bairro_endereco: {
+        complemento_endereco: {
           allowNull: false,
           type: Sequelize.STRING
         },
@@ -38,10 +42,6 @@ module.exports = {
           type: Sequelize.STRING
         },
         estado_endereco: {
-          allowNull: false,
-          type: Sequelize.STRING
-        },
-        complemento_endereco: {
           allowNull: false,
           type: Sequelize.STRING
         },
