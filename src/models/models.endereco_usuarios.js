@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize');
 const { connection } = require('../database/connection');
 
 const endereco_usuario = connection.define('endereco_usuario', {
+    id_endereco: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true        
+    },
     cep_local: {
         type: DataTypes.STRING
     },

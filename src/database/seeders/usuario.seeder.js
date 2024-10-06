@@ -13,6 +13,8 @@ module.exports = {
               data_nascimento: '1990-01-01',
               email: 'usuario1@exemplo.com',
               password: await bcrypt.hash('12345', 10),
+              status: false,
+              id_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
             },
@@ -23,6 +25,8 @@ module.exports = {
               data_nascimento: '1995-05-05',
               email: 'usuario2@exemplo.com',
               password: await bcrypt.hash('12345', 10),
+              status: false,
+              id_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
             },
@@ -33,6 +37,8 @@ module.exports = {
               data_nascimento: '1985-10-10',
               email: 'usuario3@exemplo.com',
               password: await bcrypt.hash('12345', 10),
+              status: false,
+              id_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
             },
@@ -43,6 +49,8 @@ module.exports = {
               data_nascimento: '1985-09-10',
               email: 'usuario4@exemplo.com',
               password: await bcrypt.hash('12345', 10),
+              status: false,
+              id_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
             },
@@ -53,6 +61,8 @@ module.exports = {
               data_nascimento: '1985-05-10',
               email: 'usuario5@exemplo.com',
               password: await bcrypt.hash('12345', 10),
+              status: false,
+              id_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
             }         
