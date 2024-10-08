@@ -19,6 +19,13 @@ const Usuarios = connection.define('usuarios', {
     },
     cpf: {
         type: DataTypes.STRING
+    },
+    id_endereco: {
+        type: DataTypes.INTEGER,
+    references: {
+            model: 'endereco_usuarios',
+            key: 'id_endereco'                   
+                }
     }
 });
 
