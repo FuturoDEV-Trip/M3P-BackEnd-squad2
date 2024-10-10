@@ -44,14 +44,11 @@ module.exports = {
           allowNull: false,
           type: Sequelize.BOOLEAN
         },
-        id_endereco: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: 'endereco_usuarios',
-            key: 'id_endereco'
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE'
+        cep_endereco: {
+          type: Sequelize.INTEGER
+        },
+        descricao_endereco: {
+          type: Sequelize.STRING
         },
         createdAt: {
           allowNull: false,

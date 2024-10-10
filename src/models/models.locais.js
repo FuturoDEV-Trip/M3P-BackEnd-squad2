@@ -32,12 +32,8 @@ const Locais = connection.define('locais', {
         type: DataTypes.STRING
     },
     id_usuario: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'usuarios',
-        key: 'id'                   
+      type: DataTypes.INTEGER       
       }
-    }
 });
 
 module.exports = Locais;

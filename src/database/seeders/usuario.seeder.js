@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     async up(queryInterface, Sequelize) {
-      // Insira os dados na tabela
       await queryInterface.bulkInsert('usuarios', [
           {
               nome: 'Usuário 1',
@@ -14,10 +13,9 @@ module.exports = {
               email: 'usuario1@exemplo.com',
               password: await bcrypt.hash('12345', 10),
               status: false,
-              id_endereco: null,
-              createdAt: new Date(),
-              updatedAt: new Date()
-            },
+              cep_endereco: null,
+              descricao_endereco: null
+          },
             {
               nome: 'Usuário 2',
               sexo: 'Feminino',
@@ -26,9 +24,8 @@ module.exports = {
               email: 'usuario2@exemplo.com',
               password: await bcrypt.hash('12345', 10),
               status: false,
-              id_endereco: null,
-              createdAt: new Date(),
-              updatedAt: new Date()
+              cep_endereco: null,
+              descricao_endereco: null
             },
             {
               nome: 'Usuário 3',
@@ -38,9 +35,9 @@ module.exports = {
               email: 'usuario3@exemplo.com',
               password: await bcrypt.hash('12345', 10),
               status: false,
-              id_endereco: null,
-              createdAt: new Date(),
-              updatedAt: new Date()
+              cep_endereco: null,
+              descricao_endereco: null,
+              id_endereco: null
             },
             {
               nome: 'Usuário 4',
@@ -50,9 +47,9 @@ module.exports = {
               email: 'usuario4@exemplo.com',
               password: await bcrypt.hash('12345', 10),
               status: false,
-              id_endereco: null,
-              createdAt: new Date(),
-              updatedAt: new Date()
+              cep_endereco: null,
+              descricao_endereco: null,
+              id_endereco: null
             },
             {
               nome: 'Usuário 5',
@@ -62,9 +59,8 @@ module.exports = {
               email: 'usuario5@exemplo.com',
               password: await bcrypt.hash('12345', 10),
               status: false,
-              id_endereco: null,
-              createdAt: new Date(),
-              updatedAt: new Date()
+              cep_endereco: null,
+              descricao_endereco: null
             }         
       ], {});
   
