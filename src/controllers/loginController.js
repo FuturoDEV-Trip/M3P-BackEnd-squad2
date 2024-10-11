@@ -1,6 +1,6 @@
 const Usuario = require("../models/models.usuarios")
 const { sign } = require('jsonwebtoken')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 class LoginController {
 
