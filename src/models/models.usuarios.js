@@ -19,6 +19,12 @@ const Usuarios = connection.define('usuarios', {
     },
     cpf: {
         type: DataTypes.STRING
+    },
+    cep_endereco: {
+        type: DataTypes.STRING
+    },
+    descricao_endereco: {
+        type: DataTypes.STRING
     }
 });
 
