@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize');
 const { connection } = require('../database/connection');
 
 const Locais = connection.define('locais', {
+    id_local: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true      
+    },
     nome_local: {
         type: DataTypes.STRING
     },
@@ -27,8 +32,8 @@ const Locais = connection.define('locais', {
         type: DataTypes.STRING
     },
     id_usuario: {
-      type: DataTypes.INTEGER
-    }
+      type: DataTypes.INTEGER       
+      }
 });
 
 module.exports = Locais;
