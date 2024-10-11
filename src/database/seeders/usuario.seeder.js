@@ -14,7 +14,9 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null
+              descricao_endereco: null,
+              createdAt: new Date(),
+              updatedAt: new Date()
           },
             {
               nome: 'Usuário 2',
@@ -25,7 +27,9 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null
+              descricao_endereco: null,
+              createdAt: new Date(),
+              updatedAt: new Date()
             },
             {
               nome: 'Usuário 3',
@@ -36,7 +40,9 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null
+              descricao_endereco: null,
+              createdAt: new Date(),
+              updatedAt: new Date()
             },
             {
               nome: 'Usuário 4',
@@ -47,7 +53,9 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null
+              descricao_endereco: null,
+               createdAt: new Date(),
+              updatedAt: new Date()
             },
             {
               nome: 'Usuário 5',
@@ -58,7 +66,9 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null
+              descricao_endereco: null,
+              createdAt: new Date(),
+              updatedAt: new Date()
             }         
       ], {});
   
