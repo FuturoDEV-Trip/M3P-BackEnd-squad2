@@ -11,6 +11,8 @@ class UsuariosController {
             const data_nascimento = req.body.data_nascimento
             const cpf = req.body.cpf
             const sexo = req.body.sexo
+            const cep_endereco = req.body.cep_endereco
+            const descricao_endereco = req.body.descricao_endereco
             const criptografarPassword = await bcrypt.hash(password, 10)
         
         
@@ -39,6 +41,12 @@ class UsuariosController {
             if (!data_nascimento.match(/\d{4}-\d{2}-\d{2}/gm)) {
                 return res.status(400).json({ message: 'A data de nascimento é não está no formato correto' })
             }
+            if (!cep_endereco) {
+                 return res.status(400).json({ message: 'O preenchimento do CEP é obrigatório' })
+            }
+            if (!descricao_endereco) {
+                return res.status(400).json({ message: 'O preenchimento da descrição do endereço é obrigatório' })
+            }
         
             const usuarios = await Usuarios.create({
                 email: email,
@@ -46,7 +54,9 @@ class UsuariosController {
                 nome: nome,
                 data_nascimento: data_nascimento,
                 cpf: cpf,
-                sexo: sexo
+                sexo: sexo,
+                cep_endereco: cep_endereco,
+                descricao_endereco: descricao_endereco
         
             })
         
@@ -55,7 +65,7 @@ class UsuariosController {
         } catch (error) {
             console.log(error.message)
             res.status(500).json({ error: error,
-                message: 'Não possível cadastrar o usuário' })
+                message: 'Não foi possível cadastrar o usuário' })
         }
     };
 
