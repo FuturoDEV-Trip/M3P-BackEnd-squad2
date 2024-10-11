@@ -47,8 +47,7 @@ module.exports = {
               password: await bcrypt.hash('12345', 10),
               status: false,
               cep_endereco: null,
-              descricao_endereco: null,
-              id_endereco: null
+              descricao_endereco: null
             },
             {
               nome: 'Usuário 5',
