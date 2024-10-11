@@ -1,5 +1,6 @@
-const Usuario = require("../models/Usuario")
+const Usuario = require("../models/models.usuarios")
 const { sign } = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 class LoginController {
 
@@ -17,7 +18,7 @@ class LoginController {
             const usuario = await Usuario.findOne({
                 where: { email: email}
             })
-            const senhaValida = await bcrypt.compare(password, usuarios.password);
+            const senhaValida = await bcrypt.compare(password, usuario.password);
 
             if (!senhaValida) {
             return res.status(401).json({ error: 'Senha incorreta' });
