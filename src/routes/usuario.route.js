@@ -15,4 +15,5 @@ usuariosRoutes.delete('/:id', auth,  UsuariosController.deletar);
 
 usuariosRoutes.put('/:id',auth, UsuariosController.alterar)
 
+
 module.exports = usuariosRoutes

@@ -17,7 +17,7 @@ module.exports = {
               descricao_endereco: null,
               createdAt: new Date(),
               updatedAt: new Date()
-            },
+          },
             {
               nome: 'Usuário 2',
               sexo: 'Feminino',
@@ -33,7 +33,6 @@ module.exports = {
             },
             {
               nome: 'Usuário 3',
-
               sexo: 'Masculino',
               cpf: '34567890456',
               data_nascimento: '1985-10-10',
@@ -55,7 +54,7 @@ module.exports = {
               status: false,
               cep_endereco: null,
               descricao_endereco: null,
-              createdAt: new Date(),
+               createdAt: new Date(),
               updatedAt: new Date()
             },
             {

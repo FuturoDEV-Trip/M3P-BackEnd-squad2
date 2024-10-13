@@ -17,6 +17,7 @@ class UsuariosController {
             const status =  req.body.status
             const criptografarPassword = await bcrypt.hash(password, 10)
 
+
         
         
             if (!nome) {
@@ -64,6 +65,8 @@ class UsuariosController {
         
                 return res.status(409).json({ message: dadosCadastrados });
               }
+
+
         
             const usuarios = await Usuarios.create({
                 email: email,
@@ -81,11 +84,13 @@ class UsuariosController {
             res.status(201).json(usuarios)
         
         } catch (error) {
+
             console.error("Error: ", error); // Logar o erro completo para mais detalhes
             res.status(500).json({
                 error: error.message || error,
                 message: 'Não foi possível cadastrar o usuário'
             });
+
         }
     };
 
@@ -119,10 +124,10 @@ class UsuariosController {
     async deletar(req, res) {
 
         try {
-
             const id = req.params.id
     
             const usuario = await Usuarios.findOne({where:{id: id}})
+
     
             if (!usuario) {
                 return res.status(404).json({ message: "Usuário não encontrado!" })
@@ -141,6 +146,7 @@ class UsuariosController {
 
     async alterar(req, res) {
         try {
+
             const { id } = req.params;
             const { nome, password, sexo, data_nascimento, status, cep_endereco, descricao_endereco } = req.body;
     
@@ -176,4 +182,3 @@ class UsuariosController {
 }
 
 module.exports = new UsuariosController()
-
