@@ -30,7 +30,6 @@ class LoginController {
                 return res.status(401).json({ error: 'Senha incorreta' });
             }
 
-            // Atualiza o status para true na tabela usuarios
             usuario.status = true;
             await usuario.save(); 
 

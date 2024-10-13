@@ -6,4 +6,5 @@ const loginRoutes = new Router()
 
 loginRoutes.post('/', LoginController.acessar)
 
+
 module.exports = loginRoutes

@@ -2,6 +2,7 @@ const { Router } = require("express");
 const usuariosRoutes = require("./usuario.route");
 const loginRoutes = require("./login.route");
 const logoutRoutes = require("./logout.route")
+
 const locaisRoutes = require("./local.route");
 
 const routes = Router()
