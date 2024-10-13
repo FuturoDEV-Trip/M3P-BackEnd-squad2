@@ -1,4 +1,5 @@
 const Usuarios = require("../models/models.usuarios")
+const Locais = require("../models/models.locais")
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 class UsuariosController {
