@@ -9,6 +9,8 @@ usuariosRoutes.post('/', UsuariosController.cadastrar );
 
 usuariosRoutes.get('/', auth,  UsuariosController.consultar);
 
+usuariosRoutes.get('/true', UsuariosController.consultarTrue);
+
 usuariosRoutes.delete('/:id', auth,  UsuariosController.deletar);
 
 usuariosRoutes.put('/:id',auth, UsuariosController.alterar)

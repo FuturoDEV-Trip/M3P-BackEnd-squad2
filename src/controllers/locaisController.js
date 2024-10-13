@@ -53,6 +53,22 @@ class locaisController {
         }
     };
 
+    async consultarTotal(req, res) {
+
+        try {
+            const TotalLocal = await Locais.count();
+    
+            if (TotalLocal > 0) {
+                res.json({Total: TotalLocal});
+            } else {
+                res.status(404).json({ error: 'Nenhum local cadastrado' });
+            }
+        } catch (error) {
+            console.error('Erro ao consultar locais:', error);
+            res.status(500).json({ error: 'Erro ao processar a solicitação' });
+        }
+    };
+
     async deletar(req, res) {
 
         try {
