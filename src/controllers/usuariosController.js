@@ -104,7 +104,23 @@ class UsuariosController {
         }
 
     };
-
+    async consultarTrue(req, res) {
+        try {
+            const totalUsuarios = await Usuarios.count({
+                where: { status: true }
+            });
+    
+            if (totalUsuarios > 0) {
+                res.json({ total: totalUsuarios });
+            } else {
+                res.status(404).json({ error: 'Nenhum usuário logado no sistema.' });
+            }
+        } catch (error) {
+            console.error("Erro ao consultar usuários:", error);
+            res.status(500).json({ error: error.message || error, message: 'Erro ao consultar usuários.' });
+        }
+    };
+   
     async deletar(req, res) {
 
         try {

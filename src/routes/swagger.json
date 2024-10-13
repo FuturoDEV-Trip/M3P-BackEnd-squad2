@@ -5,7 +5,7 @@
     "title": "API de Gestão de Locais e Usuários",
     "description": "Documentação da API para gerenciar usuários e locais."
   },
-  "host": "localhost:3000", 
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http"
@@ -113,6 +113,31 @@
           },
           "500": {
             "description": "Erro ao atualizar usuário"
+          }
+        }
+      }
+    },
+    "/usuarios/consultarTrue": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Consultar total de usuários logados",
+        "responses": {
+          "200": {
+            "description": "Total de usuários logados",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum usuário logado no sistema"
+          },
+          "500": {
+            "description": "Erro ao consultar usuários"
           }
         }
       }
@@ -243,6 +268,51 @@
           },
           "500": {
             "description": "Erro ao atualizar local"
+          }
+        }
+      }
+    },
+    "/local/consultarTotal": {
+      "get": {
+        "tags": ["Locais"],
+        "summary": "Consultar total de locais cadastrados",
+        "responses": {
+          "200": {
+            "description": "Total de locais cadastrados",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Total": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhum local cadastrado"
+          },
+          "500": {
+            "description": "Erro ao consultar locais"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": ["Logout"],
+        "summary": "Deslogar um usuário",
+        "responses": {
+          "200": {
+            "description": "Usuário deslogado com sucesso"
+          },
+          "401": {
+            "description": "Token não fornecido"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro ao deslogar"
           }
         }
       }
