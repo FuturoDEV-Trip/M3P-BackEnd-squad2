@@ -132,6 +132,12 @@ class UsuariosController {
             if (!usuario) {
                 return res.status(404).json({ message: "Usuário não encontrado!" })
             }
+            
+            const locaisAssociados = await Locais.findOne({where: {id_usuario: id}})
+
+            if (locaisAssociados){
+                return res.status(400).json({message: "Não é possível excluir o usuário, pois há locais associados a ele."})
+            }
     
             await usuario.destroy()
             return res.status(200).json({message:"Usuário excluido com sucesso!"})
