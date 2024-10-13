@@ -96,7 +96,8 @@ class UsuariosController {
 
     async consultar(req, res) {
 
-        const usuarios = await Usuarios.findAll()
+        const usuarios = await Usuarios.findAll({
+                attributes: ['id', 'nome', 'email', 'data_nascimento', 'sexo', 'cep_endereco', 'descricao_endereco', 'status']}); 
         if (usuarios.length > 0) {
             res.json(usuarios);
         } else {
