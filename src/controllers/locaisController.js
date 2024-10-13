@@ -4,21 +4,16 @@ const { default: axios } = require('axios')
 
 class locaisController {
 
-    async cadastrarCEP(req, res) {
+    async cadastrar(req, res) {
         try {
             const userId = req.user.sub;
-
             const nomeLocal = req.body.nomeLocal;
-
             const descricao = req.body.descricao;
             const latitude = req.body.lat;
             const longitude = req.body.lon;
-
             const logradouro = req.body.logradouro;
             const cidade = req.body.cidade;
             const estado = req.body.estado;
-            
-            
             const cepLocal = req.body.cep
     
             
@@ -44,11 +39,7 @@ class locaisController {
     async consultar(req, res) {
 
         try {
-            const userId = req.user.sub;
             const locaisUsuario = await Locais.findAll({
-                where: {
-                    id_usuario: userId
-                }
             });
     
             if (locaisUsuario.length > 0) {
