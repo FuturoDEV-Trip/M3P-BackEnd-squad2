@@ -7,10 +7,11 @@ const usuariosRoutes = new Router()
 
 usuariosRoutes.post('/', UsuariosController.cadastrar );
 
-usuariosRoutes.get('/',  UsuariosController.consultar);
+usuariosRoutes.get('/', auth,  UsuariosController.consultar);
 
-usuariosRoutes.delete('/:id',  UsuariosController.deletar);
+usuariosRoutes.delete('/:id', auth,  UsuariosController.deletar);
 
-usuariosRoutes.put('/:id', UsuariosController.alterar)
+usuariosRoutes.put('/:id',auth, UsuariosController.alterar)
+
 
 module.exports = usuariosRoutes

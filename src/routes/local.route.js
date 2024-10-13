@@ -4,9 +4,9 @@ const locaisController = require('../controllers/locaisController');
 
 const locaisRoutes = new Router()
 
-locaisRoutes.post('/', auth, locaisController.cadastrarCEP);
+locaisRoutes.post('/', auth, locaisController.cadastrar);
 
-locaisRoutes.get('/local', auth, locaisController.consultar);
+locaisRoutes.get('/local', locaisController.consultar);
 
 locaisRoutes.delete('/local/:local_id', auth, locaisController.deletar);
 

@@ -1,5 +1,6 @@
 const Usuarios = require("../models/models.usuarios")
 const bcrypt = require('bcrypt')
+const { Op } = require('sequelize')
 class UsuariosController {
 
     async cadastrar(req, res) {
@@ -13,7 +14,10 @@ class UsuariosController {
             const sexo = req.body.sexo
             const cep_endereco = req.body.cep_endereco
             const descricao_endereco = req.body.descricao_endereco
+            const status =  req.body.status
             const criptografarPassword = await bcrypt.hash(password, 10)
+
+
         
         
             if (!nome) {
@@ -44,9 +48,25 @@ class UsuariosController {
             if (!cep_endereco) {
                  return res.status(400).json({ message: 'O preenchimento do CEP é obrigatório' })
             }
+            if (!status) {
+                return res.status(400).json({ message: 'O preenchimento do status é obrigatório' })
+           }
             if (!descricao_endereco) {
                 return res.status(400).json({ message: 'O preenchimento da descrição do endereço é obrigatório' })
             }
+
+            const usuarioExistente = await Usuarios.findOne({
+                where: {
+                  [Op.or]: [{ cpf }, {email }]
+                }
+              });
+              if (usuarioExistente) {
+                  const dadosCadastrados = usuarioExistente.email === email ? 'E-mail já cadastrado' : 'CPF já cadastrado';
+        
+                return res.status(409).json({ message: dadosCadastrados });
+              }
+
+
         
             const usuarios = await Usuarios.create({
                 email: email,
@@ -55,6 +75,7 @@ class UsuariosController {
                 data_nascimento: data_nascimento,
                 cpf: cpf,
                 sexo: sexo,
+                status: status,
                 cep_endereco: cep_endereco,
                 descricao_endereco: descricao_endereco
         
@@ -63,9 +84,13 @@ class UsuariosController {
             res.status(201).json(usuarios)
         
         } catch (error) {
-            console.log(error.message)
-            res.status(500).json({ error: error,
-                message: 'Não foi possível cadastrar o usuário' })
+
+            console.error("Error: ", error); // Logar o erro completo para mais detalhes
+            res.status(500).json({
+                error: error.message || error,
+                message: 'Não foi possível cadastrar o usuário'
+            });
+
         }
     };
 
@@ -83,10 +108,10 @@ class UsuariosController {
     async deletar(req, res) {
 
         try {
-
-            const { id } = req.params
+            const id = req.params.id
     
-            const usuario = await Usuarios.findOne({where:{id}})
+            const usuario = await Usuarios.findOne({where:{id: id}})
+
     
             if (!usuario) {
                 return res.status(404).json({ message: "Usuário não encontrado!" })
@@ -105,22 +130,39 @@ class UsuariosController {
 
     async alterar(req, res) {
         try {
-            const { id } = req.params
-            const { email, password } = req.body
+
+            const { id } = req.params;
+            const { nome, password, sexo, data_nascimento, status, cep_endereco, descricao_endereco } = req.body;
     
-            let usuario = await Usuarios.findOne({ where: { id:id, usuario_id: req.usuario_id } })
+            let usuario = await Usuarios.findOne({ where: { id: id} });
     
             if (!usuario) {
-                return res.status(404).json({ message: 'Usuário não encontrado ou não pertence ao usuário autenticado' })
+                return res.status(404).json({ message: 'Usuário não encontrado ou não pertence ao usuário autenticado' });
             }
+            const atualizacoes = {
+                nome,
+                sexo,
+                data_nascimento,
+                status,
+                cep_endereco,
+                descricao_endereco
+            };
     
-            usuario = await usuario.update({email, password})
+            if (password) {
+                atualizacoes.password = await bcrypt.hash(password, 10);
+            }
+
+            await Usuarios.update(atualizacoes, { where: { id: id} });
+
+            usuario = await Usuarios.findOne({ where: { id: id} });
     
-            res.status(200).json(usuario)
+            res.status(200).json(usuario);
         } catch (error) {
-            res.status(500).json({ message: 'Erro ao atualizar o Usuário' })
+            console.log(error.message);
+            res.status(500).json({ message: 'Erro ao atualizar o Usuário', error: error.message });
         }
     };
+    
 }
 
 module.exports = new UsuariosController()
