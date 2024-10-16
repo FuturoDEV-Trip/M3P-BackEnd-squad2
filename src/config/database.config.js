@@ -2,11 +2,11 @@ const { config } = require ('dotenv')
 config ()
 
 module.exports = {
-    dialect: process.env.DB_DIALECT,
-    host: process.env.DB_HOST,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    dialect: process.env.DIALECT,
+    host: process.env.HOST,
+    username: process.env.USERNAMEDB,
+    password: process.env.PASSWORDDB,
+    database: process.env.DATABASE,
     port: process.env.PORT_DB,
     dialectOptions: {
         ssl: {
